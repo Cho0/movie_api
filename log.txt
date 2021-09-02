@@ -10,3 +10,4 @@ Timestamp: Tue Aug 24 2021 20:07:01 GMT-0700 (Pacific Daylight Time)
 URL: /favicon.ico
 Timestamp: Tue Aug 24 2021 20:07:01 GMT-0700 (Pacific Daylight Time)
 
+::1 - - [02/Sep/2021:22:30:56 +0000] "GET /movies HTTP/1.1" 200 154
