@@ -25,7 +25,15 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(methodOverride());
 
-app.get('/movies', (req, res) => {
+
+const passport = require('passport');
+require('./passport');
+passport.initialize()
+
+let auth = require('./auth')(app);
+
+
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -64,7 +72,7 @@ app.post('/addmovie', (req, res) => {
 });
 */
 
-app.get('/movies/:Title', (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ Title: req.params.Title })
     .then((movies) => {
       res.status(201).json(movies);
@@ -97,15 +105,15 @@ app.get('/movies/by-director/:Director', (req, res) => {
     });
 });
 
-app.post('/register', (req, res) => {
-  Users.findOne({ Name: req.body.Name })
+app.post('/register', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
-        return res.status(400).send(req.body.Name + 'already exists');
+        return res.status(400).send(req.body.Username + 'already exists');
       } else {
         Users
           .create({
-            Name: req.body.Name,
+            Username: req.body.Username,
             Password: req.body.Password,
             Email: req.body.Email,
             Birthday: req.body.Birthday
@@ -134,8 +142,8 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.get('/users/:Name', (req, res) => {
-  Users.findOne({ Name: req.params.Name })
+app.get('/users/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
     })
@@ -145,8 +153,8 @@ app.get('/users/:Name', (req, res) => {
     });
 });
 
-app.put('/users/:Name', (req, res) => {
-  Users.findOneAndUpdate({ Name: req.params.Name },
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username },
     req.body,
     { new: true },
     (err, updatedUser) => {
@@ -160,8 +168,8 @@ app.put('/users/:Name', (req, res) => {
 });
 
 
-app.put('/users/:Name/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Name: req.params.Name }, {
+app.put('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
     $push: { Favorites: req.params.MovieID }
   },
     { new: true },
@@ -175,8 +183,8 @@ app.put('/users/:Name/movies/:MovieID', (req, res) => {
     });
 });
 
-app.delete('/users/:Name/favorites/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({Name: req.params.Name}, {
+app.delete('/users/:Username/favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}, {
     $pull: {Favorites: req.params.MovieID}
   },
   {new: true},
@@ -190,13 +198,13 @@ app.delete('/users/:Name/favorites/:MovieID', (req, res) => {
   });
 });
 
-app.delete('/users/:Name', (req, res) => {
-  Users.findOneAndRemove({ Name: req.params.Name })
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
-        res.status(400).send(req.params.Name + 'was not found');
+        res.status(400).send(req.params.Username + 'was not found');
       } else {
-        res.status(200).send(req.params.Name + ' was deleted.');
+        res.status(200).send(req.params.Username + ' was deleted.');
       }
     })
     .catch((err) => {
