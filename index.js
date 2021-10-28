@@ -254,8 +254,9 @@ app.use((err, req, res, next) => {
 
 //port
 
-app.listen(8000, () => {
-  console.log('Your app is listening on port 8000.');
+const port = process.env.PORT || 8000;
+app.listen(port, '0.0.0.0',() => {
+  console.log('Listening on Port ' + port);
 });
 
 // cd d:\Portfolio\movie_api
