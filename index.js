@@ -10,7 +10,7 @@ const { check, validationResult } = require('express-validator');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://JasonAdmin:TotallyLegitPassword@myflixdb.qrljb.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
@@ -260,3 +260,9 @@ app.listen(port, '0.0.0.0',() => {
 });
 
 // cd d:\Portfolio\movie_api
+
+// mongoimport --uri mongodb+srv://JasonAdmin:TotallyLegitPassword@myflixdb.qrljb.mongodb.net/jasons-myFlix --collection movies --type json --file .\Portfolio\movie_api\movies.json
+
+//mongo "mongodb+srv://myflixdb.qrljb.mongodb.net/MyflixDB" --username JasonAdmin
+
+//mongodb+srv://JasonAdmin:TotallyLegitPassword@myflixdb.qrljb.mongodb.net/jasons-myFlix?retryWrites=true&w=majority
