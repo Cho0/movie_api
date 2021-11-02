@@ -1,11 +1,13 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 const fs = require('fs');
 const topMovies = require('./movie_list');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const { check, validationResult } = require('express-validator');
+dotenv.config();
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -223,7 +225,7 @@ app.delete('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', {
   });
 });
 
-app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete('/users/:Username', (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {

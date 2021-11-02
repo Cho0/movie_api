@@ -295,3 +295,12 @@ Timestamp: Tue Aug 24 2021 20:07:01 GMT-0700 (Pacific Daylight Time)
 ::1 - - [25/Oct/2021:22:00:20 +0000] "PUT /users/Ron/movies/61451ddd8465e4534cc759a2 HTTP/1.1" 200 200
 ::1 - - [25/Oct/2021:22:00:34 +0000] "DELETE /users/Ron/favorites/61451ddd8465e4534cc759a2 HTTP/1.1" 200 174
 ::1 - - [25/Oct/2021:22:01:01 +0000] "GET /users/Ron HTTP/1.1" 200 174
+127.0.0.1 - - [02/Nov/2021:20:06:45 +0000] "GET /movies/Hereditary HTTP/1.1" 401 -
+127.0.0.1 - - [02/Nov/2021:20:07:09 +0000] "POST /login HTTP/1.1" 400 49
+127.0.0.1 - - [02/Nov/2021:20:08:42 +0000] "DELETE /users/Jason/ HTTP/1.1" 401 -
+127.0.0.1 - - [02/Nov/2021:20:09:12 +0000] "DELETE /users/Jason/ HTTP/1.1" 200 18
+127.0.0.1 - - [02/Nov/2021:20:09:16 +0000] "POST /register/ HTTP/1.1" 201 219
+127.0.0.1 - - [02/Nov/2021:20:09:20 +0000] "POST /login HTTP/1.1" 200 700
+127.0.0.1 - - [02/Nov/2021:20:09:37 +0000] "GET /movies/Hereditary HTTP/1.1" 201 429
+127.0.0.1 - - [02/Nov/2021:20:20:55 +0000] "POST /register/ HTTP/1.1" 422 94
+127.0.0.1 - - [02/Nov/2021:20:21:06 +0000] "POST /register/ HTTP/1.1" 201 215
