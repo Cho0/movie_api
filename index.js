@@ -136,7 +136,7 @@ app.post('/register',
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
+        return res.status(400).send(req.body.Username + ' already exists');
       } else {
         Users
           .create({
@@ -229,7 +229,7 @@ app.delete('/users/:Username', (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
-        res.status(400).send(req.params.Username + 'was not found');
+        res.status(400).send(req.params.Username + ' was not found');
       } else {
         res.status(200).send(req.params.Username + ' was deleted.');
       }
