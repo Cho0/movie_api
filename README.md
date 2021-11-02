@@ -1,5 +1,9 @@
 # movie_api
 
+This movie api is really a practice for Reading, Updating, Deleting and Creating information from a database. With integration of a hashed password from account creation and 
+getting a token to then get access to the rest of the website, It has a lot of the tools needed to get started in working on actual websites.
+
+My poor poor decisions and my unlucky outcomes:
 This project was an absolute pain to get working. A combo of me not knowing what is right and wrong and the lesson material being a little hard to understand.
 While I cant explain everything that happened in detail, one of the biggest issues I had was with the specific port of 8080 not working...
 When downloading PostgreSQL, it had me put in a port so I put in the specific port 8080. Now this would create problems for some reason with postman.
